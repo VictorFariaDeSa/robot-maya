@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<robot name="my_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- INCLUDES: properties -->
+    <xacro:include filename="properties/inertia_properties.xacro" />
+    <xacro:include filename="properties/materials.xacro" />
+
+    <!-- INCLUDES: components -->
+    <xacro:include filename="components/2DoF_leg.xacro" />
+    <xacro:include filename="components/body.xacro" />
+    
+
+    <!-- DIMENSIONS -->
+    <xacro:property name="body_length" value = "0.6"/>
+    <xacro:property name="body_width" value ="0.4"/>
+    <xacro:property name="body_height" value="0.2"/>
+    <xacro:property name="leg_radius" value ="0.05"/>
+    <xacro:property name="upper_leg_length" value ="0.25"/>
+    <xacro:property name="lower_leg_length" value ="0.25"/>
+    <xacro:property name="feet_radius" value ="0.05"/>
+
+    
+    <xacro:body_link 
+    prefix="main"
+    length="${body_length}"
+    width="${body_width}"
+    height="${body_height}"/>
+
+
+
+    <xacro:two_DoF_leg 
+    prefix="RR"
+    parent_link="main_body_link"
+    x_offset="${-body_length/2.0}" 
+    y_offset="${-body_width/2.0}"
+    z_offset="0"
+    radius="${leg_radius}"
+    upper_length="${upper_leg_length}"
+    lower_length="${lower_leg_length}"
+    first_joint_min_lim="0"
+    first_joint_max_lim="0"
+    second_joint_min_lim="0"
+    second_joint_max_lim="0"/>
+
+    <xacro:two_DoF_leg 
+    prefix="RL"
+    parent_link="main_body_link"
+    x_offset="${-body_length/2.0}" 
+    y_offset="${ body_width/2.0}"
+    z_offset="0"
+    radius="${leg_radius}"
+    upper_length="${upper_leg_length}"
+    lower_length="${lower_leg_length}"
+    first_joint_min_lim="0"
+    first_joint_max_lim="0"
+    second_joint_min_lim="0"
+    second_joint_max_lim="0"/>
+
+    <xacro:two_DoF_leg 
+    prefix="FR"
+    parent_link="main_body_link"
+    x_offset="${ body_length/2.0}" 
+    y_offset="${-body_width/2.0}"
+    z_offset="0"
+    radius="${leg_radius}"
+    upper_length="${upper_leg_length}"
+    lower_length="${lower_leg_length}"
+    first_joint_min_lim="0"
+    first_joint_max_lim="0"
+    second_joint_min_lim="0"
+    second_joint_max_lim="0"/>
+
+    <xacro:two_DoF_leg 
+    prefix="FL"
+    parent_link="main_body_link"
+    x_offset="${ body_length/2.0}" 
+    y_offset="${ body_width/2.0}"
+    z_offset="0"
+    radius="${leg_radius}"
+    upper_length="${upper_leg_length}"
+    lower_length="${lower_leg_length}"
+    first_joint_min_lim="0"
+    first_joint_max_lim="0"
+    second_joint_min_lim="0"
+    second_joint_max_lim="0"/>
+
+
+    <link name="base_link"/>
+    <joint name="std_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="main_body_link"/>
+        <origin xyz = "0 0 0" rpy = "0 0 0"/>
+    </joint>
+
+
+</robot>
+
+ 
